@@ -52,11 +52,11 @@ def occFunc():
             isValid = validateScheduleFunc(idx_j, transactionList)
             if (isValid == True):
                 transactionList[idx_j].setEndTimestamp(time.time())
-                print("Transaction {} is valid".format(idx_j + 1))
             else:
                 print("Transaction {} is invalid".format(idx_j + 1))
                 return False
 
+    print("All transactions are valid!")
     return True
         
 occFunc()
