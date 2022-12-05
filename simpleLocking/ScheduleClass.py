@@ -6,26 +6,33 @@ from OperationClass import Operation
 class Schedule:
     def __init__(self):
         self.operationSchedule = []
-        self.transactions = []
     
     def addOperation(self, new_operation:Operation):
         self.operationSchedule.append(new_operation)
     
-    def addTransaction(self, new_transaction:Transaction):
-        self.transactions.append(new_transaction)
+    def removeOperation(self, operation:Operation):
+        self.operationSchedule.remove(operation)
     
-    def printTransactions(self):
-        idx = 0
-        for transaction in self.transactions:
-            print("Transaction {}: ".format(idx + 1), end="")
-            transaction.printAllOperations()
-            print()
+    def getAllOperations(self):
+        return self.operationSchedule
     
-    def getTransaction(self, transaction_name:int):
-        for transaction in self.transactions:
-            if transaction.name == transaction_name:
-                return transaction
-        return False
+    def findOperationFromTransactionName(self, transaction_name:int):
+        operationList = []
+        for operation in self.operationSchedule:
+            if operation.getTransactionName() == transaction_name and operation.getType() != "C":
+                operationList.append(operation)
+        if len(operationList) != 0:
+            return operationList
+        return []
+
+    def findOperationByObject(self, item_name:str):
+        operationList = []
+        for operation in self.operationSchedule:
+            if operation.object.getName() == item_name:
+                operationList.append(operation)
+        if len(operationList) != 0:
+            return operationList
+        return []
     
     def printOperationSchedule(self):
         for operation in self.operationSchedule:
