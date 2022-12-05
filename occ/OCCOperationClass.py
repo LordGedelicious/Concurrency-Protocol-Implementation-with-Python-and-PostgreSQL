@@ -3,7 +3,8 @@ from ItemClass import Item
 
 # Create a operation class
 class Operation:
-    def __init__(self, type:str, transaction_name:int, item=None):
+    def __init__(self, idx:int, type:str, transaction_name:int, item:Item=None):
+        self.idx = idx # The index in the ordering of the operations
         self.type = type # Can be either "W" for "WRITE" or "R" for "READ" or "A" for "ABORT" or "C" for "COMMIT" or "XL" for "Granting X-LOCK"
         self.item = item # Tables that are used in the operation, if type is "A" or "C", then item is None
         self.transactionName = transaction_name # Transaction name that the operation belongs to
@@ -22,6 +23,9 @@ class Operation:
     
     def getItem(self):
         return self.item
+    
+    def getIdx(self):
+        return self.idx
     
     def getItemName(self):
         return self.item.getName()
