@@ -40,9 +40,10 @@ schedule.printOperationSchedule()
 
 # Create a list of transactions and build locks
 completedOperationsName = []
+countCommits = 0
 while True:
     for operation in schedule.getAllOperations():
-        print("Operation: {}".format(operation.getFullName()), end="")
+        print("Operation: {}".format(operation.getItemName()), end="")
         if  operation.getType() != "C":
             # Uncompleted operation
             # Check if operation's item is locked or not.
@@ -68,8 +69,9 @@ while True:
                     if item.getLockedBy() == operation.getTransactionName():
                         item.setIsLocked(False)
                         item.setLockedBy(None)
+                        countCommits += 1
         print("Current contents of completed operations: {}".format(completedOperationsName))
-    if len(schedule.getAllOperations()) == 0:
+    if len(schedule.getAllOperations()) == 0 or countCommits == countTransactions:
         break
 
 print(completedOperationsName)

@@ -24,7 +24,7 @@ class Operation:
         return self.item
     
     def getItemName(self):
-        return self.item.getName()
+        return self.transactionName
     
     def printOperation(self):
         if self.type != "C":
